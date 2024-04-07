@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="selector">#1D51E1</color>
+    <color name="icon_stealth">#B0B0B3</color>
 </resources>

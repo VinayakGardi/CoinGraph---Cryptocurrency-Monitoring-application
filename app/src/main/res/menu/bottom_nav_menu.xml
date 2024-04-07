@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_home"
+        app:showAsAction="always"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+        />
+
+
+    <item
+        android:id="@+id/nav_market"
+        app:showAsAction="always"
+        android:title="Market"
+        android:icon="@drawable/ic_market"
+        />
+
+
+    <item
+        android:id="@+id/nav_favourite"
+        app:showAsAction="always"
+        android:title="Favourite"
+        android:icon="@drawable/ic_save" />
+
+</menu>
