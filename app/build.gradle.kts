@@ -53,4 +53,14 @@ dependencies {
 
     implementation ("com.intuit.ssp:ssp-android:1.1.1")
     implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
+    // loading animation
+    implementation ("com.github.ybq:Android-SpinKit:1.4.0")
+
+    //retrofit api
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+//    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
 }

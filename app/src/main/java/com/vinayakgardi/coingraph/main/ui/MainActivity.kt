@@ -1,4 +1,4 @@
-package com.vinayakgardi.coingraph.ui
+package com.vinayakgardi.coingraph.main.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
