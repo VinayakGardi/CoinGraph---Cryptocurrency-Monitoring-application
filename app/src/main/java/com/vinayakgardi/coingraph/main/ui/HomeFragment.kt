@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import com.vinayakgardi.coingraph.R
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.vinayakgardi.coingraph.databinding.FragmentHomeBinding
+import com.vinayakgardi.coingraph.main.adapter.TopGainLossPagerAdapter
 import com.vinayakgardi.coingraph.main.adapter.TopListAdapter
 import com.vinayakgardi.coingraph.main.api.ApiInterface
 import com.vinayakgardi.coingraph.main.api.ApiUtilities
@@ -29,7 +31,38 @@ class HomeFragment : Fragment() {
 
         getTopCurrencyData()
 
+        setupTabLayout()
+
         return binding.root
+    }
+
+    private fun setupTabLayout() {
+        val adapter = TopGainLossPagerAdapter(this)
+        binding.contentViewPager.adapter = adapter
+
+        binding.contentViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position == 0){
+                    binding.topGainIndicator.visibility = View.VISIBLE
+                    binding.topLoseIndicator.visibility = View.GONE
+                }
+                else{
+                    binding.topGainIndicator.visibility = View.GONE
+                    binding.topLoseIndicator.visibility = View.VISIBLE
+                }
+            }
+        })
+
+        TabLayoutMediator(binding.tabLayout , binding.contentViewPager){
+            tab , position ->
+            var title = if(position ==0 ){
+                "Top Gainers"
+            }else{
+                "Top Losers"
+            }
+            tab.text = title
+        }.attach()
     }
 
     private fun getTopCurrencyData() {
