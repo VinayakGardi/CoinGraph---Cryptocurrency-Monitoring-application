@@ -5,14 +5,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextClock
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.vinayakgardi.coingraph.R
 import com.vinayakgardi.coingraph.databinding.TopCurrencyLayoutBinding
-import com.vinayakgardi.coingraph.main.Utilities
+import com.vinayakgardi.coingraph.main.utlities.Utilities
 import com.vinayakgardi.coingraph.main.model.CryptoCurrency
 
 class TopListAdapter(val context: Context , val topCryptoCurrencyList : List<CryptoCurrency>) : RecyclerView.Adapter<ViewHolder>() {
