@@ -2,9 +2,11 @@ package com.vinayakgardi.coingraph.main.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.speech.tts.UtteranceProgressListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -36,9 +38,11 @@ class TopListAdapter(val context: Context , val topCryptoCurrencyList : List<Cry
         val currencyName = holder.itemView.findViewById<TextView>(R.id.topCurrencyNameTextView)
         currencyName.text = currentCoin.name
 
-        Glide.with(context).load("https://s2.coinmarketcap.com/static/img/coins/64x64/"+currentCoin.id+".png")
-            .thumbnail(Glide.with(context).load(R.drawable.spinner))
-            .into(holder.itemView.findViewById(R.id.topCurrencyImageView))
+//        Glide.with(context).load("https://s2.coinmarketcap.com/static/img/coins/64x64/"+currentCoin.id+".png")
+//            .thumbnail(Glide.with(context).load(R.drawable.spinner))
+//            .into(holder.itemView.findViewById(R.id.topCurrencyImageView))
+
+        Utilities.loadFromGlide("https://s2.coinmarketcap.com/static/img/coins/64x64/"+currentCoin.id+".png",holder.itemView.findViewById<ImageView>(R.id.topCurrencyImageView) , context )
 
 
         if(currentCoin.quotes[0].percentChange24h>0){

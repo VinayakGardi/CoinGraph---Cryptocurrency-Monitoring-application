@@ -23,11 +23,23 @@
         <action
             android:id="@+id/action_homeFragment_to_statsFragment"
             app:destination="@id/statsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment2"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
         android:name="com.vinayakgardi.coingraph.main.ui.SavedFragment"
         android:label="Saved"
         tools:layout="@layout/fragment_saved" >
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.vinayakgardi.coingraph.main.ui.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="data"
+            app:argType="com.vinayakgardi.coingraph.main.model.CryptoCurrency"
+            app:nullable="true" />
     </fragment>
 </navigation>

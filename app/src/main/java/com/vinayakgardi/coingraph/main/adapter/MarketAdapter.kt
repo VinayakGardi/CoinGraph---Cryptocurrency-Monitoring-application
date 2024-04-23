@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.vinayakgardi.coingraph.R
 import com.vinayakgardi.coingraph.databinding.CurrencyItemLayoutBinding
 import com.vinayakgardi.coingraph.main.utlities.Utilities
 import com.vinayakgardi.coingraph.main.model.CryptoCurrency
+import com.vinayakgardi.coingraph.main.ui.HomeFragmentDirections
 
 class MarketAdapter(val context: Context, var marketList: List<CryptoCurrency>) :
     RecyclerView.Adapter<MarketAdapter.ViewHolder>() {
@@ -29,10 +31,6 @@ class MarketAdapter(val context: Context, var marketList: List<CryptoCurrency>) 
         val coin = marketList[position]
 
         holder.binding.currencyNameTextView.text = coin.name   // name
-
-//        Glide.with(context).load("https://s2.coinmarketcap.com/static/img/coins/64x64/"+coin.id+".png")
-//            .thumbnail(Glide.with(context).load(R.drawable.spinner))
-//            .into(holder.itemView.findViewById(R.id.currencyImageView))
 
         Utilities.loadFromGlide("https://s2.coinmarketcap.com/static/img/coins/64x64/"+coin.id+".png" , holder.binding.currencyImageView , context)// symbol image
 
@@ -55,5 +53,12 @@ class MarketAdapter(val context: Context, var marketList: List<CryptoCurrency>) 
         Utilities.loadFromGlide("https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" + coin.id + ".png" , holder.binding.currencyChartImageView , context)
 
 
+        // open the detail view
+
+        holder.itemView.setOnClickListener {
+            findNavController(it).navigate(
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment2(coin)
+            )
+        }
     }
 }
