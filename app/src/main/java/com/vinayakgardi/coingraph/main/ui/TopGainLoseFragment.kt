@@ -57,7 +57,7 @@ class TopGainLoseFragment : Fragment() {
                             list.add(items[items.size - 1 - i])
                         }
                         binding.topGainLoseRecyclerView.adapter =
-                            MarketAdapter(requireContext(), list)
+                            MarketAdapter(requireContext(), list ,"Home")
 
                     } else {  // gain
                         list.clear()
@@ -65,7 +65,7 @@ class TopGainLoseFragment : Fragment() {
                             list.add(items[i])
                         }
                         binding.topGainLoseRecyclerView.adapter =
-                            MarketAdapter(requireContext(), list)
+                            MarketAdapter(requireContext(), list , "Home")
 
                     }
 

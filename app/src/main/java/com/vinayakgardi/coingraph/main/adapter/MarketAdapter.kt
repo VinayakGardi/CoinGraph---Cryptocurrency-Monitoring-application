@@ -11,12 +11,21 @@ import com.vinayakgardi.coingraph.databinding.CurrencyItemLayoutBinding
 import com.vinayakgardi.coingraph.main.utlities.Utilities
 import com.vinayakgardi.coingraph.main.model.CryptoCurrency
 import com.vinayakgardi.coingraph.main.ui.HomeFragmentDirections
+import com.vinayakgardi.coingraph.main.ui.SavedFragmentDirections
+import com.vinayakgardi.coingraph.main.ui.StatsFragment
+import com.vinayakgardi.coingraph.main.ui.StatsFragmentDirections
 
-class MarketAdapter(val context: Context, var marketList: List<CryptoCurrency>) :
+class MarketAdapter(val context: Context, var marketList: List<CryptoCurrency> , var type : String) :
     RecyclerView.Adapter<MarketAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val binding = CurrencyItemLayoutBinding.bind(itemView)
+    }
+
+    fun updateData( updateData : List<CryptoCurrency>){
+        marketList = updateData
+        notifyDataSetChanged()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,10 +64,23 @@ class MarketAdapter(val context: Context, var marketList: List<CryptoCurrency>) 
 
         // open the detail view
 
+
         holder.itemView.setOnClickListener {
-            findNavController(it).navigate(
+            if (type == "Home") {
+                findNavController(it).navigate(
                 HomeFragmentDirections.actionHomeFragmentToDetailFragment2(coin)
             )
+        }
+            else if(type == "Stat"){
+                findNavController(it).navigate(
+                    StatsFragmentDirections.actionStatsFragmentToDetailFragment(coin)
+                )
+            }
+            else{
+                findNavController(it).navigate(
+                    SavedFragmentDirections.actionSavedFragmentToDetailFragment(coin)
+                )
+            }
         }
     }
 }
