@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -15,8 +16,11 @@ import com.vinayakgardi.coingraph.R
 import com.vinayakgardi.coingraph.databinding.TopCurrencyLayoutBinding
 import com.vinayakgardi.coingraph.main.utlities.Utilities
 import com.vinayakgardi.coingraph.main.model.CryptoCurrency
+import com.vinayakgardi.coingraph.main.ui.HomeFragmentDirections
+import com.vinayakgardi.coingraph.main.ui.SavedFragmentDirections
+import com.vinayakgardi.coingraph.main.ui.StatsFragmentDirections
 
-class TopListAdapter(val context: Context , val topCryptoCurrencyList : List<CryptoCurrency>) : RecyclerView.Adapter<ViewHolder>() {
+class TopListAdapter(val context: Context , val topCryptoCurrencyList : List<CryptoCurrency> , val type : String) : RecyclerView.Adapter<ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
       var binding = TopCurrencyLayoutBinding.bind(view)
@@ -53,6 +57,15 @@ class TopListAdapter(val context: Context , val topCryptoCurrencyList : List<Cry
             holder.itemView.findViewById<TextView>(R.id.topCurrencyChangeTextView).setTextColor(context.getColor(R.color.red))
             holder.itemView.findViewById<TextView>(R.id.topCurrencyChangeTextView).text =
                 "${Utilities.roundToTwoDecimals(currentCoin.quotes[0].percentChange24h)} %"
+        }
+
+
+        holder.itemView.setOnClickListener {
+            if (type == "Home") {
+                Navigation.findNavController(it).navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment2(currentCoin)
+                )
+            }
         }
 
 

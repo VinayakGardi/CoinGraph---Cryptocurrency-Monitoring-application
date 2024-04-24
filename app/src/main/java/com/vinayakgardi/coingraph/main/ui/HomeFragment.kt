@@ -14,6 +14,7 @@ import com.vinayakgardi.coingraph.main.adapter.TopGainLossPagerAdapter
 import com.vinayakgardi.coingraph.main.adapter.TopListAdapter
 import com.vinayakgardi.coingraph.main.api.ApiInterface
 import com.vinayakgardi.coingraph.main.api.ApiUtilities
+import com.vinayakgardi.coingraph.main.model.CryptoCurrency
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,6 +22,7 @@ import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
     lateinit var binding : FragmentHomeBinding
+    lateinit var topCurrencyList : ArrayList<CryptoCurrency>
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,9 +70,16 @@ class HomeFragment : Fragment() {
     private fun getTopCurrencyData() {
         lifecycleScope.launch(Dispatchers.IO) {
             val res = ApiUtilities.getInstance().create(ApiInterface::class.java).getData()
+            topCurrencyList = arrayListOf()
+
+
+            for(i in 0..10){
+                topCurrencyList.add(res.body()!!.data.cryptoCurrencyList[i])
+            }
+
 
             withContext(Dispatchers.Main){
-                binding.topCoinsRecyclerView.adapter = TopListAdapter(requireContext() , res.body()!!.data.cryptoCurrencyList)
+                binding.topCoinsRecyclerView.adapter = TopListAdapter(requireContext() , topCurrencyList ,"Home")
             }
             Log.d("APICALLING", "getTopCurrency: ${res.body()?.data?.cryptoCurrencyList}")
         }
