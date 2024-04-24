@@ -32,10 +32,30 @@ class DetailFragment : Fragment() {
 
         setUpWebView(data!!)
 
+        setupAdditionalData(data!!)
+
         setButtonClickListener(data!!)
 
 
+
+
         return binding.root
+    }
+
+    private fun setupAdditionalData(data: CryptoCurrency) {
+        val totalSupply = data.totalSupply
+        val percentChange1y = data.quotes[0].percentChange1y
+        val name = data.name
+        val marketCap = data.quotes[0].marketCap
+        val volume24h = data.quotes[0].volume24h
+        val dominance = data.quotes[0].dominance
+
+        binding.coinDominanceTextView.text = "Dominance : "+dominance.toString()
+        binding.coinNameTextView.text = "Name : "+name.toString()
+        binding.coinPercentChange1yTextView.text = "Percent Change 1 Y : "+percentChange1y.toString()+" %"
+        binding.coinMarketcapTextView.text = "Market Cap : $"+marketCap.toString()
+        binding.coinVolume24hTextView.text = "Volume 24h : $"+volume24h.toString()
+        binding.coinTotalSupplyTextView.text = "Total Supply : $"+totalSupply.toString()
     }
 
     private fun setButtonClickListener(data: CryptoCurrency) {
@@ -162,7 +182,7 @@ class DetailFragment : Fragment() {
         binding.detaillChartWebView.settings.javaScriptEnabled = true
         binding.detaillChartWebView.setLayerPaint(null)
         binding.detaillChartWebView.loadUrl(
-            "https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76d87&symbol="+data.symbol.toString()+"/USD&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&symboledit=1&saveimage=1&toolbarbg=F1F3F6&studies=[]&hideideas=1&theme=Dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en"
+            "https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76d87&symbol=" + data.symbol.toString() + "/USD&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&symboledit=1&saveimage=1&toolbarbg=F1F3F6&studies=[]&hideideas=1&theme=Dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en"
         )
 
     }
