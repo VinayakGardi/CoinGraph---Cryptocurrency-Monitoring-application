@@ -1,5 +1,6 @@
 package com.vinayakgardi.coingraph.main.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.vinayakgardi.coingraph.R
 import com.vinayakgardi.coingraph.databinding.FragmentDetailsBinding
 import com.vinayakgardi.coingraph.main.model.CryptoCurrency
@@ -18,6 +21,8 @@ class DetailFragment : Fragment() {
     lateinit var binding: FragmentDetailsBinding
 
     private val coinItem: DetailFragmentArgs by navArgs()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +41,62 @@ class DetailFragment : Fragment() {
 
         setButtonClickListener(data!!)
 
+        addDatatoSaved(data!!)
+
 
 
 
         return binding.root
+    }
+
+    var savedList : ArrayList<String>? = null
+    var savedListIsChecked : Boolean = false
+    private fun addDatatoSaved(data: CryptoCurrency) {
+         readData()
+        savedListIsChecked = if(savedList!!.contains(data.symbol)){
+            binding.addWatchlistButton.setImageResource(R.drawable.ic_star)
+            true
+        }else{
+            binding.addWatchlistButton.setImageResource(R.drawable.ic_star_outline)
+            false
+        }
+
+        binding.addWatchlistButton.setOnClickListener {
+            savedListIsChecked  = if(!savedListIsChecked){
+                if(!savedList!!.contains(data.symbol)){
+                    savedList!!.add(data.symbol)
+                }
+                storeData()
+                binding.addWatchlistButton.setImageResource(R.drawable.ic_star)
+                true
+            }
+            else{
+                savedList!!.remove(data.symbol)
+                binding.addWatchlistButton.setImageResource(R.drawable.ic_star_outline)
+                storeData()
+                false
+            }
+        }
+
+
+    }
+
+    private fun readData() {
+        val sharedPreferences = requireContext().getSharedPreferences("savedList" , Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("savedList",ArrayList<String>().toString())
+        val type = object : TypeToken<ArrayList<String>>(){}.type
+        savedList = gson.fromJson(json,type)
+    }
+
+    private fun storeData(){
+        val sharedPreferences = requireContext().getSharedPreferences("savedList" , Context.MODE_PRIVATE)
+        val gson = Gson()
+        val editor = sharedPreferences.edit()
+        val json = gson.toJson(savedList)
+        editor.putString("savedList" , json)
+        editor.apply()
+
     }
 
     private fun setupAdditionalData(data: CryptoCurrency) {
