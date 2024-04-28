@@ -27,7 +27,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailsBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
 
@@ -35,13 +35,13 @@ class DetailFragment : Fragment() {
 
         setUpDetails(data!!)
 
-        setUpWebView(data!!)
+        setUpWebView(data)
 
-        setupAdditionalData(data!!)
+        setupAdditionalData(data)
 
-        setButtonClickListener(data!!)
+        setButtonClickListener(data)
 
-        addDatatoSaved(data!!)
+        addDatatoSaved(data)
 
 
 

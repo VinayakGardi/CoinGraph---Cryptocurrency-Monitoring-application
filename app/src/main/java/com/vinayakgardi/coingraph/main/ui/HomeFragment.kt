@@ -15,6 +15,7 @@ import com.vinayakgardi.coingraph.main.adapter.TopListAdapter
 import com.vinayakgardi.coingraph.main.api.ApiInterface
 import com.vinayakgardi.coingraph.main.api.ApiUtilities
 import com.vinayakgardi.coingraph.main.model.CryptoCurrency
+import com.vinayakgardi.coingraph.main.utlities.Utilities
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,11 +32,17 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
+        checkInternet()
+
         getTopCurrencyData()
 
         setupTabLayout()
 
         return binding.root
+    }
+
+    private fun checkInternet() {
+
     }
 
     private fun setupTabLayout() {
@@ -69,7 +76,7 @@ class HomeFragment : Fragment() {
 
     private fun getTopCurrencyData() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val res = ApiUtilities.getInstance().create(ApiInterface::class.java).getData()
+            val res = Utilities.loadDataFromApi()
             topCurrencyList = arrayListOf()
 
 

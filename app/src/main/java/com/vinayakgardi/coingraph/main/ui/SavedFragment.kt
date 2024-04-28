@@ -11,9 +11,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vinayakgardi.coingraph.databinding.FragmentSavedBinding
 import com.vinayakgardi.coingraph.main.adapter.MarketAdapter
-import com.vinayakgardi.coingraph.main.api.ApiInterface
-import com.vinayakgardi.coingraph.main.api.ApiUtilities
 import com.vinayakgardi.coingraph.main.model.CryptoCurrency
+import com.vinayakgardi.coingraph.main.utlities.Utilities
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,14 +34,14 @@ class SavedFragment : Fragment() {
         readData()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val res = ApiUtilities.getInstance().create(ApiInterface::class.java).getData()
-            if(res!!.body()!=null){
+            val res = Utilities.loadDataFromApi()
+            if(res.body()!=null){
                 withContext(Dispatchers.Main){
                     savedListItem = ArrayList()
                     savedListItem.clear()
 
                     for(savedItem in savedList){
-                        for(item in res!!.body()!!.data!!.cryptoCurrencyList){
+                        for(item in res.body()!!.data.cryptoCurrencyList){
                             if(savedItem == item.symbol){
                                 savedListItem.add(item)
                             }

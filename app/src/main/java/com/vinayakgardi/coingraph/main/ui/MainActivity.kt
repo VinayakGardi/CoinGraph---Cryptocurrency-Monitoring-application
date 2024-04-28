@@ -1,5 +1,7 @@
 package com.vinayakgardi.coingraph.main.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -16,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val colorDrawable = ColorDrawable(Color.parseColor(R.color.background_card.toString()))
+
+        actionBar?.setBackgroundDrawable(colorDrawable)
 
         setUpSmoothBottomBar()
 
