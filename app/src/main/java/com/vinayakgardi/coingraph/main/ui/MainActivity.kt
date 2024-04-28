@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val colorDrawable = ColorDrawable(Color.parseColor(R.color.background_card.toString()))
 
-        actionBar?.setBackgroundDrawable(colorDrawable)
+        // action bar color fixed
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#272765")))
 
         setUpSmoothBottomBar()
 
