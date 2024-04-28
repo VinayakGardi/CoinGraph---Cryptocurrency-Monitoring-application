@@ -12,7 +12,7 @@ import retrofit2.Response
 object Utilities {
 
     fun roundToTwoDecimals(number: Double): Double {
-        return String.format("%.2f", number).toDouble()
+        return String.format("%.6f", number).toDouble()
     }
 
     fun loadFromGlide(source : String  , View : ImageView , context : Context){
