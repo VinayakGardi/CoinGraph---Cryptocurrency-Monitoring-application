@@ -1,14 +1,14 @@
 package com.vinayakgardi.coingraph.main.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.VideoView
+import androidx.appcompat.app.AppCompatActivity
 import com.vinayakgardi.coingraph.R
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
