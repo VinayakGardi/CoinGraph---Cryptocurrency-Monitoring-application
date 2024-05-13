@@ -1,6 +1,7 @@
 package com.vinayakgardi.coingraph.main.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +44,9 @@ class DetailFragment : Fragment() {
 
         addDatatoSaved(data)
 
+        binding.backStackButton.setOnClickListener{
+            startActivity(Intent(requireContext() , MainActivity::class.java))
+        }
 
 
 

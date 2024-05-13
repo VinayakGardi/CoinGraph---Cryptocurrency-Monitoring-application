@@ -29,7 +29,7 @@ Coingraph: Your go-to Android app for monitoring cryptocurrency trends in real-t
 - run the project in emulator or any physical device
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
 
 
 ## Technology used 
