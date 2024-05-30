@@ -1,5 +1,7 @@
 package com.vinayakgardi.coingraph.main.model
 
+import java.io.Serializable
+
 data class Quote(
     val dominance: Double,
     val fullyDilluttedMarketCap: Double,
@@ -19,4 +21,12 @@ data class Quote(
     val tvl: Double,
     val volume24h: Double,
     val ytdPriceChangePercentage: Double
-)
+) : Serializable{
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
+
+    override fun toString(): String {
+        return super.toString()
+    }
+}

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -34,15 +35,25 @@ class DetailFragment : Fragment() {
 
         val data: CryptoCurrency? = coinItem.data
 
-        setUpDetails(data!!)
+        if (data != null) {
+            setUpDetails( data)
+        }
 
-        setUpWebView(data)
+        if (data != null) {
+            setUpWebView(data)
+        }
 
-        setupAdditionalData(data)
+        if (data != null) {
+            setupAdditionalData(data)
+        }
 
-        setButtonClickListener(data)
+        if (data != null) {
+            setButtonClickListener(data)
+        }
 
-        addDatatoSaved(data)
+        if (data != null) {
+            addDatatoSaved(data)
+        }
 
         binding.backStackButton.setOnClickListener{
             startActivity(Intent(requireContext() , MainActivity::class.java))
@@ -55,6 +66,7 @@ class DetailFragment : Fragment() {
 
     var savedList : ArrayList<String>? = null
     var savedListIsChecked : Boolean = false
+
     private fun addDatatoSaved(data: CryptoCurrency) {
          readData()
         savedListIsChecked = if(savedList!!.contains(data.symbol)){
@@ -219,7 +231,7 @@ class DetailFragment : Fragment() {
         disableButtons(button1, button2, button3, button4, button5)
 
         binding.detaillChartWebView.settings.javaScriptEnabled = true
-        binding.detaillChartWebView.setLayerPaint(null)
+        binding.detaillChartWebView.webViewClient = WebViewClient()
         binding.detaillChartWebView.loadUrl(
             "https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76d87&symbol=" + data.symbol + "/USD&interval=" + s + "&hidesidetoolbar=1&hidetoptoolbar=1&symboledit=1&saveimage=1&toolbarbg=F1F3F6&studies=[]&hideideas=1&theme=Dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en&utm_source=coinmarketcap.com&utm_medium=widget&utm_campaign=chart&utm_term=BTCUSDT"
         )
@@ -241,9 +253,9 @@ class DetailFragment : Fragment() {
 
     private fun setUpWebView(data: CryptoCurrency) {
         binding.detaillChartWebView.settings.javaScriptEnabled = true
-        binding.detaillChartWebView.setLayerPaint(null)
+        binding.detaillChartWebView.webViewClient = WebViewClient()
         binding.detaillChartWebView.loadUrl(
-            "https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76d87&symbol=" + data.symbol.toString() + "/USD&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&symboledit=1&saveimage=1&toolbarbg=F1F3F6&studies=[]&hideideas=1&theme=Dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en"
+            "https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76d87&symbol=" + data.symbol + "/USD&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&symboledit=1&saveimage=1&toolbarbg=F1F3F6&studies=[]&hideideas=1&theme=Dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en"
         )
 
     }

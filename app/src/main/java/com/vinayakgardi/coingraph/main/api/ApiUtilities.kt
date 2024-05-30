@@ -16,5 +16,3 @@ object ApiUtilities {
     }
 
 }
-
-//https://s2.coinmarketcap.com/static/img/coins/64x64/" + imageID + .png   // image loading website
